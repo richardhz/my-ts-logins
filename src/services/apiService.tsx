@@ -24,6 +24,7 @@ const GetList = async (pageUrl: string) => {
       name: "Aris Bass Blog",
     },
   ];
+  console.log("Api called...");
   return myData;
 };
 
