@@ -4,7 +4,7 @@ const LoginItem = (props: { item: Item; onClickFunction: any }) => {
   const handleClick = () => props.onClickFunction(props.item.id);
   return (
     <li
-      className="list-group-item list-group-item-action"
+      className="list-group-item list-group-item-action sba-button-action"
       onClick={handleClick}
     >
       {props.item.name}

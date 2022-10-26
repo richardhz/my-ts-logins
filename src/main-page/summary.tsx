@@ -1,32 +1,53 @@
 import React, { useState, useEffect } from "react";
 import LoginItem from "./loginItem";
 import Item from "../models/item";
-import GetList from "../services/apiService";
+import ItemInfo from "../models/itemInfo";
+import GetList, { GetInfo } from "../services/apiService";
+import LoginItemInfo from "./loginItemInfo";
 
 const SummaryList = () => {
   const items: Item[] = [];
+  const info: ItemInfo = {
+    id: "",
+    name: "",
+    login: "",
+    password: "",
+    description: "",
+  };
   const [listData, setListData] = useState(items);
-  //const [dataUrl, setDataUrl] = useState("");
+  const [isLoading, setLoading] = useState(true);
+  const [requestId, setRequestId] = useState("");
+  const [infoData, setInfoData] = useState(info);
 
-  const itemClickHandler = (id: string) => console.log(id);
+  const itemClickHandler = (id: string) => setRequestId(id);
 
   useEffect(() => {
-    async function processGet() {
-      const data = await GetList("");
+    const processGet = async () => {
+      const data = await GetList();
       setListData(data);
-    }
-
+      setLoading(false);
+    };
     processGet();
   }, []);
 
-  //console.log("Data -> ", listData);
+  useEffect(() => {
+    const processGetInfo = async (rid: string) => {
+      const data = await GetInfo(rid);
+      setInfoData(data);
+    };
+    processGetInfo(requestId);
+  }, [requestId]);
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
     <div className="container mt-5 p-5">
       <div className="row">
         <div className="col-3">
+          <div>Login Items</div>
           <ul className="list-group login--list">
-            <li className="list-group-item login-header">Login Items</li>
             {listData.map((d) => (
               <LoginItem
                 item={d}
@@ -35,6 +56,10 @@ const SummaryList = () => {
               />
             ))}
           </ul>
+        </div>
+        <div className="col-7">
+          <div>Login Detail</div>
+          <LoginItemInfo item={infoData} />
         </div>
       </div>
     </div>
