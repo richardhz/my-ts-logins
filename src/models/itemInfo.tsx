@@ -1,9 +1,9 @@
 interface ItemInfo {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-  description: string;
+  name?: string;
+  login?: string;
+  password?: string;
+  description?: string;
+  url?: string;
 }
 
 export default ItemInfo;

@@ -7,6 +7,7 @@ const LoginItemInfo = (props: { item: ItemInfo }) => {
       <div>{props.item.name}</div>
       <div>{props.item.login}</div>
       <div>{props.item.password}</div>
+      <div>{props.item.url}</div>
       <div>{props.item.description}</div>
     </>
   );

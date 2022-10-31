@@ -7,13 +7,7 @@ import LoginItemInfo from "./loginItemInfo";
 
 const SummaryList = () => {
   const items: Item[] = [];
-  const info: ItemInfo = {
-    id: "",
-    name: "",
-    login: "",
-    password: "",
-    description: "",
-  };
+  const info: ItemInfo = {};
   const [listData, setListData] = useState(items);
   const [isLoading, setLoading] = useState(true);
   const [requestId, setRequestId] = useState("");
@@ -60,6 +54,7 @@ const SummaryList = () => {
         <div className="col-7">
           <div>Login Detail</div>
           <LoginItemInfo item={infoData} />
+          <div>We have the Id when we select item:- {requestId}</div>
         </div>
       </div>
     </div>
